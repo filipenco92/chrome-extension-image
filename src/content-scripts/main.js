@@ -3,7 +3,7 @@ import Extension from "./Extension.vue";
 
 const MOUNT_EXTENSION_ID = "yosemite-extension";
 export const POPUP_ID = 'yosemite-image-tooltip';
-const MIN_IMG_WIDTH = 200;
+const MIN_IMG_WIDTH = 100;
 const MIN_IMG_HEIGHT = 100;
 let mountEl = undefined;
 let vm = undefined;
