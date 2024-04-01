@@ -17,7 +17,8 @@
 
 <script>
 import { defineComponent } from "vue";
-import { POPUP_ID } from './main.js'
+import { POPUP_ID } from './extension.js';
+
 export default defineComponent({
     data: () => ({
         isActive: true,

@@ -17,6 +17,6 @@ export default defineConfig({
     },
     plugins: [
         vue(),
-        chromeExtension()
+        chromeExtension(),
     ],
 })

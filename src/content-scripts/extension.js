@@ -8,13 +8,6 @@ const MIN_IMG_HEIGHT = 100;
 let mountEl = undefined;
 let vm = undefined;
 
-// mountEl = document.createElement("div");
-// mountEl.setAttribute("id", MOUNT_EXTENSION_ID);
-
-// document.body.appendChild(mountEl);
-// vm = createApp(Extension).mount(mountEl);
-
-
 const mouseOverImage = (event) => {
     let el = event.target
     let computedStyle = window.getComputedStyle(el)
@@ -58,15 +51,12 @@ const mouseOverImage = (event) => {
     } else {
         const app = document.getElementById(MOUNT_EXTENSION_ID);
         if (app && el.id !== POPUP_ID && !(imageTooltip && imageTooltip.contains(el))) {
-            console.log('vm.imageTooltip = false')
             vm.imageTooltip = false
         }
     }
 } 
 
-document.addEventListener('mouseover', mouseOverImage)
-
-document.addEventListener('mousemove', () => {
+const removeDOMExtension = () => {
     if (vm) {
         const app = document.getElementById(MOUNT_EXTENSION_ID)
         if (app && app.children && app.children.length === 0) {
@@ -75,6 +65,19 @@ document.addEventListener('mousemove', () => {
             mountEl = undefined;
             vm = undefined
         }
-
     }
-})
+}
+
+document.addEventListener('mouseover', mouseOverImage)
+
+document.addEventListener('mousemove', removeDOMExtension)
+
+chrome.runtime.onMessage.addListener((message) => {
+    if (message && message.data === false) {
+        // extensionIsEnabled = message.data
+        removeDOMExtension();
+        document.removeEventListener('mouseover', mouseOverImage)
+    } else {
+        document.addEventListener('mouseover', mouseOverImage)
+    }
+  });
