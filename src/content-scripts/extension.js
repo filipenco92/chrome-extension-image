@@ -79,10 +79,10 @@ const mouseOverImage = (event) => {
   }
 };
 
-const removeDOMExtension = () => {
+const removeDOMExtension = (el, force = false) => {
   if (vm) {
     const app = document.getElementById(MOUNT_DOM_EXTENSION_ID);
-    if (app && app.children && app.children.length === 0) {
+    if ((app && app.children && app.children.length === 0) || (app && force)) {
       // remove extension from the DOM
       app.remove();
       mountEl = undefined;
@@ -108,6 +108,7 @@ const turnOffExtension = () => {
   document.removeEventListener("mouseover", mouseOverImage);
   document.removeEventListener("mousemove", removeDOMExtension);
   // and change extension icons to disabled icons
+  removeDOMExtension(null, true);
   changeIcon(DISABLED_ICONS);
 };
 
