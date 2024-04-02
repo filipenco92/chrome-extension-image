@@ -134,5 +134,6 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === "local" && changes.hasOwnProperty([EXTENSION_IS_ENABLED])) {
     if (changes[EXTENSION_IS_ENABLED].newValue) turnOnExtension();
     else turnOffExtension();
+    console.log("set --->: ", changes[EXTENSION_IS_ENABLED].newValue);
   }
 });

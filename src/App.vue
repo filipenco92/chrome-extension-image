@@ -36,6 +36,7 @@ export default defineComponent({
     chrome.storage.local.get(EXTENSION_IS_ENABLED, (result) => {
       if (result && result.hasOwnProperty(EXTENSION_IS_ENABLED))
         this[EXTENSION_IS_ENABLED] = result[EXTENSION_IS_ENABLED];
+      else this[EXTENSION_IS_ENABLED] = this.INIT_EXTENSION;
     });
   },
   computed: {
